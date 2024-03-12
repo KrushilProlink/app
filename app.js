@@ -625,19 +625,19 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.post('/logout', authenticateToken, async (req, res) => {
-    const { username } = req.user;
+app.post('/logout', async (req, res) => {
+    const username = req.body?.username;
 
     // Notify other devices about the logout
     io.emit('logout', { username });
 
-    // Clear socketId and accessToken on the current device
-    await User.updateOne({ username, socketId: req.socket.id }, { $set: { socketId: null } });
+    // Clear socketId on the current device
+    // await User.updateOne({ username, socketId: req.socket.id }, { $set: { socketId: null } });         // req.socket.id  req.io.id - undefined
+    await User.updateOne({ username }, { $set: { socketId: null } });
 
-    res.clearCookie('accessToken');
+    // res.clearCookie('accessToken');
     res.json({ message: 'Logout successful' });
 });
-
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
