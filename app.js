@@ -458,7 +458,7 @@ const io = socketIO(server, {
 });
 const PORT = 5201;
 
-mongoose.connect('mongodb://127.0.0.1:27017/Authentication2', {
+mongoose.connect('mongodb+srv://krushilprolink:Z7IfvNBhWJSiPQVX@cluster0.ym1vfie.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
