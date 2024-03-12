@@ -452,7 +452,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
     cors: {
-        origin: "readme-iota-five.vercel.app",  // Replace with your frontend URL
+        origin: "https://readme-iota-five.vercel.app/",  // Replace with your frontend URL
         methods: ["GET", "POST"]
     }
 });
@@ -475,7 +475,7 @@ const User = mongoose.model('users', userSchema);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'readme-iota-five.vercel.app',  // Replace with your frontend URL
+    origin: 'https://readme-iota-five.vercel.app/',  // Replace with your frontend URL
     credentials: true,
 }));
 
