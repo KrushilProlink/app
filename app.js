@@ -453,10 +453,17 @@ const server = http.createServer(app);
 const io = socketIO(server, {
     cors: {
         origin: "https://readme-iota-five.vercel.app",  // Replace with your frontend URL
+        // origin: "http://localhost:3001",  // Replace with your frontend URL
         methods: ["GET", "POST"]
     }
 });
+
 const PORT = 5201;
+const socketPort = process.env.SOCKET_PORT || 5200;
+
+server.listen(socketPort, () => {
+    console.log(`Socket.io server listening on http://localhost:${socketPort}`);
+});
 
 mongoose.connect('mongodb+srv://krushilprolink:Z7IfvNBhWJSiPQVX@cluster0.ym1vfie.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
@@ -476,6 +483,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: 'https://readme-iota-five.vercel.app',  // Replace with your frontend URL
+    // origin: 'http://localhost:3001',  // Replace with your frontend URL
     credentials: true,
 }));
 
@@ -638,6 +646,7 @@ app.post('/logout', async (req, res) => {
     // res.clearCookie('accessToken');
     res.json({ message: 'Logout successful' });
 });
-server.listen(PORT, () => {
+
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
